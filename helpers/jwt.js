@@ -12,13 +12,24 @@ function authJwt() {
     return expressJwt({
         secret,
         algorithms: ['HS256'],
-        // isRevoked: isRevoked
+        // Is revoked is a function that will check the token(majorly the details in the token and give or revoke permission)
+        isRevoked: isRevoked
     }).unless({
         path: [
+            {url: /\/api\/v1\/products(.*)/ , methods: ['GET', 'OPTIONS'] },
+            {url: /\/api\/v1\/categories(.*)/ , methods: ['GET', 'OPTIONS'] },
             `${api}/users/login`,
             `${api}/users`,
         ]
     });
+
+    async function isRevoked(req, payload, done) {
+        if(!payload.isAdmin) {
+            done(null, true)
+        }
+    
+        done();
+    }
 }
 
 module.exports = authJwt;
