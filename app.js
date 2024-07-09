@@ -34,7 +34,7 @@ const ordersRoutes = require('./routers/orders');
 app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/users`, usersRoutes);
-app.use(`${api}/products`, ordersRoutes);
+app.use(`${api}/orders`, ordersRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.CONNECTION_STRING)
