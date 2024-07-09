@@ -3,6 +3,7 @@ const Product = require('../models/product');
 const router = express.Router();
 const Category = require('../models/category');
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 router.get(`/`, async (req, res) =>{
     let filter = {};
